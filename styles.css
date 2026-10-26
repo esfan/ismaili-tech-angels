@@ -1,0 +1,348 @@
+/* =========================================================
+   Ismaili Tech Angels — marketing site
+   Theme: white · green · red
+   One continuous warm-ivory canvas. Color lives in contained
+   panels, cards, type and accents that sit ON the page — not
+   in full-bleed bands — so the site reads as one editorial
+   surface, with a single dark-green finale at the end.
+   ========================================================= */
+
+:root {
+  --paper:    #faf7f0;   /* main canvas */
+  --tint:     #f3ede1;   /* subtle alternate band (gentle step, not a jump) */
+  --white:    #ffffff;   /* cards that lift off the canvas */
+  --green:    #0f3b2d;   /* brand green — panels, feature cards, finale */
+  --green-700:#16543f;
+  --green-600:#246b52;
+  --green-ink:#123528;   /* headlines */
+
+  --red:      #b23528;   /* accent */
+  --red-600:  #c43e2f;
+  --red-700:  #9a2c21;
+
+  --ink:      #26302a;   /* body on light */
+  --muted:    #626a61;   /* secondary on light */
+  --muted-dk: #bcccc1;   /* secondary on green */
+  --white-dim:rgba(255,255,255,.82);
+
+  --line:     rgba(18,53,40,.13);
+  --line-soft:rgba(18,53,40,.08);
+  --line-dk:  rgba(255,255,255,.16);
+
+  --maxw: 1180px;
+  --pad: clamp(1.25rem, 5vw, 5rem);
+
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --shadow: 0 20px 50px rgba(18,53,40,.09);
+  --shadow-lg: 0 32px 70px rgba(18,53,40,.14);
+}
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  font-size: clamp(1rem, 0.5vw + 0.92rem, 1.13rem);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 { margin: 0; font-weight: 500; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ol, ul { margin: 0; padding: 0; list-style: none; }
+
+/* ---------- layout ---------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+/* generous, overlapping vertical rhythm so sections breathe into each other */
+.section { padding-block: clamp(4rem, 8vw, 7rem); position: relative; }
+.section--tint { background: var(--tint); }
+.section--green { background: var(--green); color: var(--white); }
+
+/* ---------- eyebrows ---------- */
+.eyebrow {
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin: 0 0 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  color: var(--red);
+}
+.eyebrow::before { content: ""; width: 1.6rem; height: 1.5px; background: currentColor; }
+.eyebrow--red { color: var(--red); }
+.eyebrow--onmission { color: #e9b0a8; }
+
+/* ---------- display headings ---------- */
+.display {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  color: var(--green-ink);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-size: clamp(2.05rem, 4.4vw, 3.4rem);
+}
+.display--light { color: #fcfaf5; }
+
+.section__head { max-width: 46rem; margin-bottom: clamp(2.4rem, 4.5vw, 3.6rem); }
+.section__lede { margin-top: 1.3rem; font-size: clamp(1.05rem, 1.3vw, 1.28rem); color: var(--muted); max-width: 40rem; }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--sans); font-weight: 600; font-size: .98rem;
+  padding: .9rem 1.6rem; border-radius: 999px;
+  transition: transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+  cursor: pointer; white-space: nowrap;
+}
+.btn--red { background: var(--red); color: #fff; }
+.btn--red:hover { background: var(--red-600); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(178,53,40,.3); }
+.btn--lg { padding: 1.05rem 2.1rem; font-size: 1.05rem; }
+
+.link-arrow {
+  font-weight: 500; color: var(--muted);
+  border-bottom: 1.5px solid transparent;
+  transition: color .25s var(--ease), border-color .25s var(--ease);
+}
+.link-arrow:hover { color: var(--red); border-color: var(--red); }
+
+/* =========================================================
+   NAV — rides on the canvas, softly solidifies
+   ========================================================= */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 100; transition: background .4s var(--ease), box-shadow .4s var(--ease); }
+.nav__inner {
+  max-width: var(--maxw); margin: 0 auto; padding: 1.15rem var(--pad);
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  transition: padding .4s var(--ease);
+}
+.nav__brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--green-ink); }
+.nav__links { display: flex; gap: 2rem; }
+.nav__links a { font-size: .92rem; font-weight: 500; color: var(--ink); opacity: .78; position: relative; transition: opacity .2s var(--ease); }
+.nav__links a::after { content: ""; position: absolute; left: 0; bottom: -5px; width: 0; height: 1.5px; background: var(--red); transition: width .3s var(--ease); }
+.nav__links a:hover { opacity: 1; }
+.nav__links a:hover::after { width: 100%; }
+.nav .btn--red { padding: .58rem 1.35rem; font-size: .9rem; }
+.nav.is-stuck { background: rgba(250,247,240,.88); backdrop-filter: saturate(140%) blur(10px); box-shadow: 0 1px 0 var(--line-soft); }
+.nav.is-stuck .nav__inner { padding-block: .8rem; }
+
+/* =========================================================
+   HERO — on the canvas, mission in a contained green card
+   ========================================================= */
+.hero {
+  position: relative;
+  min-height: 94svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(8rem, 16vh, 11rem) var(--pad) clamp(3.5rem, 7vh, 6rem);
+  overflow: hidden;
+}
+.hero::before { /* faint oversized monogram texture */
+  content: "ITA";
+  position: absolute; right: -2vw; bottom: -9vh;
+  font-family: var(--serif); font-weight: 500; font-size: 32vw; line-height: .8;
+  color: var(--green); opacity: .04; pointer-events: none; letter-spacing: -0.03em;
+}
+.hero::after { /* hairline that carries the eye into the page */
+  content: ""; position: absolute; left: var(--pad); right: var(--pad); bottom: 0; height: 1px; background: var(--line);
+}
+.hero__inner { position: relative; max-width: var(--maxw); margin: 0 auto; width: 100%; }
+.hero__title {
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(2.7rem, 6.2vw, 5.1rem); line-height: 1.02; letter-spacing: -0.02em;
+  color: var(--green-ink); margin-bottom: 1.5rem; max-width: 18ch;
+}
+.hero__lede { font-size: clamp(1.08rem, 1.5vw, 1.35rem); color: var(--muted); max-width: 42rem; line-height: 1.5; }
+.hero__cta { margin-top: clamp(2rem, 4vw, 2.8rem); display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+/* mission — part of the page, not a floating box: a quiet two-column coda under a hairline */
+.hero__mission {
+  position: relative; max-width: var(--maxw); margin: clamp(2.5rem, 5vw, 4rem) auto 0; width: 100%;
+  padding-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 0.9fr 1.3fr; gap: clamp(1.5rem, 5vw, 4rem); align-items: baseline;
+}
+.hero__mission .eyebrow { margin-bottom: 0; }
+.hero__mission-text { font-family: var(--serif); font-size: clamp(1.35rem, 2.1vw, 1.95rem); line-height: 1.3; color: var(--green-ink); letter-spacing: -0.01em; }
+
+/* =========================================================
+   SPLIT sections (sticky aside + main)  — who / invest
+   ========================================================= */
+.split__grid { display: grid; grid-template-columns: 0.9fr 1.3fr; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+.split__aside { position: sticky; top: 7rem; }
+.split__aside .display { font-size: clamp(1.85rem, 3.3vw, 2.7rem); }
+.split__lede { margin-top: 1.3rem; color: var(--muted); max-width: 26rem; }
+
+.statement { font-family: var(--serif); font-size: clamp(1.45rem, 2.4vw, 2.1rem); line-height: 1.28; color: var(--green-ink); letter-spacing: -0.01em; }
+.statement + .statement { margin-top: 1.7rem; padding-top: 1.7rem; border-top: 1px solid var(--line); }
+.statement--accent { color: var(--red); }
+
+/* invest — numbered editorial rows */
+.criteria { display: flex; flex-direction: column; }
+.criterion { display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 2.5vw, 2.2rem); padding: clamp(1.3rem, 2.4vw, 1.9rem) 0; border-top: 1px solid var(--line); }
+.criterion:last-child { border-bottom: 1px solid var(--line); }
+.criterion__num { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; color: var(--red); padding-top: .35rem; font-variant-numeric: tabular-nums; }
+.criterion h3 { font-family: var(--serif); font-size: 1.45rem; color: var(--green-ink); margin-bottom: .35rem; }
+.criterion p { color: var(--muted); }
+
+/* =========================================================
+   WHAT FOUNDERS GET — cards on the canvas, red "edge" card
+   ========================================================= */
+.help__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); align-items: start; }
+.help-card {
+  background: var(--white); border: 1px solid var(--line-soft); border-radius: 16px;
+  padding: clamp(1.7rem, 2.5vw, 2.4rem); box-shadow: var(--shadow);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.help-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.help-card__num { font-family: var(--serif); font-size: 1.1rem; color: var(--red); display: block; margin-bottom: 1rem; }
+.help-card h3 { font-family: var(--serif); font-size: 1.7rem; color: var(--green-ink); margin-bottom: .7rem; }
+.help-card p { color: var(--muted); }
+/* the edge card — contained red surface, gently raised */
+.help-card--edge {
+  background: var(--red); border-color: var(--red);
+  transform: translateY(-1.25rem); box-shadow: 0 26px 56px rgba(178,53,40,.26); position: relative;
+}
+.help-card--edge:hover { transform: translateY(-1.75rem); }
+.help-card--edge h3 { color: #fff; }
+.help-card--edge p { color: rgba(255,255,255,.9); }
+.help-card--edge .help-card__num { color: rgba(255,255,255,.85); }
+.help-card__tag {
+  position: absolute; top: -.8rem; left: clamp(1.7rem, 2.5vw, 2.4rem);
+  background: var(--green); color: #fff; font-size: .68rem; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; padding: .35rem .7rem; border-radius: 999px;
+}
+
+/* =========================================================
+   WHAT FOUNDERS DON'T GET — editorial, red side-rule
+   ========================================================= */
+.dont__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.dont__head { border-left: 3px solid var(--red); padding-left: clamp(1.2rem, 2.5vw, 2rem); }
+.dont .display { font-size: clamp(1.9rem, 3.8vw, 3rem); }
+.dont__body { font-size: clamp(1.05rem, 1.3vw, 1.22rem); color: var(--muted); line-height: 1.62; }
+
+/* =========================================================
+   TEAM — photos, mentors large, operating team smaller
+   ========================================================= */
+.member {
+  background: var(--white); border: 1px solid var(--line-soft); border-radius: 16px;
+  padding: clamp(1.5rem, 2.4vw, 2.1rem); box-shadow: var(--shadow);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.member:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.member__head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
+.member__photo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; flex: none; border: 1px solid var(--line-soft); }
+.member h3 { font-family: var(--serif); color: var(--green-ink); line-height: 1.1; }
+.member__role { font-size: .74rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--red); margin-top: .3rem; }
+.member > p { color: var(--muted); }
+
+.team__mentors { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); margin-bottom: clamp(1rem, 2vw, 1.5rem); }
+.member--lg h3 { font-size: 1.55rem; }
+.member--lg .member__photo { width: 72px; height: 72px; }
+
+.team__ops { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.5rem); max-width: 64%; }
+.member--sm h3 { font-size: 1.3rem; }
+.member--sm > p { font-size: .96rem; }
+
+/* =========================================================
+   CASE STUDY — one contained green panel on the canvas
+   ========================================================= */
+.case__panel {
+  background: var(--green); color: #fff; border-radius: 22px;
+  padding: clamp(1.8rem, 3.5vw, 3.2rem); box-shadow: var(--shadow-lg);
+  display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(1.8rem, 4vw, 3.5rem); align-items: center;
+}
+.case__founder { margin: 0; }
+.case__photo { width: 100%; max-width: 280px; aspect-ratio: 1; object-fit: cover; border-radius: 50%; margin-bottom: 1.5rem; border: 3px solid rgba(255,255,255,.12); }
+.case__founder h3 { font-family: var(--serif); font-size: 1.6rem; color: #fcfaf5; margin-bottom: .5rem; }
+.case__founder figcaption p { color: var(--muted-dk); max-width: 28rem; }
+.case__did { background: var(--green-700); border-radius: 16px; padding: clamp(1.6rem, 2.6vw, 2.3rem); }
+.case__intro { color: var(--white-dim); margin-bottom: 1.6rem; }
+.case__three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; border-top: 1px solid var(--line-dk); padding-top: 1.6rem; }
+.case__three h4 { font-family: var(--serif); font-size: 1.15rem; color: #fcfaf5; margin-bottom: .35rem; }
+.case__three p { color: var(--muted-dk); font-size: .9rem; }
+
+/* =========================================================
+   PROCESS — connected timeline
+   ========================================================= */
+.timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(.8rem, 1.5vw, 1.4rem); position: relative; }
+.timeline::before { content: ""; position: absolute; top: 24px; left: 6%; right: 6%; height: 2px; background: var(--line); z-index: 0; }
+.tstep { position: relative; z-index: 1; padding-right: .5rem; }
+.tstep__dot {
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--paper); border: 2px solid var(--red); color: var(--red);
+  font-family: var(--serif); font-size: 1.3rem; font-weight: 500; margin-bottom: 1.2rem;
+}
+.tstep h3 { font-family: var(--serif); font-size: 1.2rem; color: var(--green-ink); margin-bottom: .35rem; }
+.tstep p { color: var(--muted); font-size: .92rem; }
+.tstep--feature .tstep__dot { background: var(--green); border-color: var(--green); color: #fff; }
+.tstep--feature h3 { color: var(--green); }
+
+/* =========================================================
+   APPLY — the single dark finale (flows into footer)
+   ========================================================= */
+.apply { padding-block: clamp(5rem, 9vw, 8rem); }
+.apply__inner { text-align: center; max-width: 48rem; margin-inline: auto; }
+.apply__inner .eyebrow { justify-content: center; }
+.apply__title { font-size: clamp(2.4rem, 6vw, 4.2rem); margin-bottom: 1.4rem; }
+.apply__lede { font-size: clamp(1.05rem, 1.35vw, 1.3rem); color: var(--white-dim); max-width: 38rem; margin: 0 auto 2.4rem; }
+.apply__cta { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.apply__note { font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-dk); }
+
+/* =========================================================
+   FOOTER — continues the green, no jump
+   ========================================================= */
+.footer { background: #0b2c21; color: var(--white-dim); padding-block: 2.4rem; }
+.footer__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.footer__brand { font-family: var(--serif); font-size: 1.05rem; color: #fff; }
+.footer__link { font-size: .92rem; transition: color .2s var(--ease); }
+.footer__link:hover { color: #e9b0a8; }
+
+/* =========================================================
+   MOTION — sparse scroll reveal
+   ========================================================= */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease), transform .8s var(--ease); will-change: opacity, transform; }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1000px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero__mission { max-width: 32rem; }
+  .split__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .split__aside { position: static; }
+  .help__grid { grid-template-columns: 1fr; }
+  .help-card--edge { transform: none; }
+  .help-card--edge:hover { transform: translateY(-5px); }
+  .dont__grid { grid-template-columns: 1fr; }
+  .team__mentors { grid-template-columns: 1fr; }
+  .team__ops { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+  .case__panel { grid-template-columns: 1fr; }
+  .case__photo { max-width: 240px; }
+}
+@media (max-width: 760px) { .nav__links { display: none; } }
+@media (max-width: 680px) {
+  .team__ops { grid-template-columns: 1fr; }
+  .case__three { grid-template-columns: 1fr; gap: 1.1rem; }
+  .timeline { grid-template-columns: 1fr; gap: 0; }
+  .timeline::before { top: 0; bottom: 0; left: 23px; right: auto; width: 2px; height: auto; }
+  .tstep { display: grid; grid-template-columns: auto 1fr; column-gap: 1.2rem; padding: 0 0 2rem 0; }
+  .tstep__dot { margin-bottom: 0; }
+  .tstep h3 { grid-column: 2; align-self: center; margin-bottom: .3rem; }
+  .tstep p { grid-column: 2; }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { transition-duration: .01ms !important; }
+}
